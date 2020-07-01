@@ -145,8 +145,7 @@ A regular style.
 
                 "DejaVu Sans Book",
 
-                "HanaMinA Regular", "HanaMinB Regular",
-                "Unifont Medium", "unifont Medium", "Unifont Upper Medium";
+                "HanaMinA Regular", "HanaMinB Regular";
 
 /*
 A bold style is available for almost all scripts. Bold text is heavier than
