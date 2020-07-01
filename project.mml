@@ -34,6 +34,7 @@ _parts:
     user: "gisuser"
     password: "gis"
     dbname: "gis"
+    connect_timeout: "30"
     key_field: ""
     geometry_field: "way"
     extent: "-20037508,-20037508,20037508,20037508"
