@@ -31,6 +31,7 @@ PG_MAINTENANCE_WORK_MEM=${PG_MAINTENANCE_WORK_MEM:-256MB}
 OSM2PGSQL_CACHE=${OSM2PGSQL_CACHE:-512}
 OSM2PGSQL_NUMPROC=${OSM2PGSQL_NUMPROC:-1}
 OSM2PGSQL_DATAFILE=${OSM2PGSQL_DATAFILE:-data.osm.pbf}
+EXTERNAL_DATA_SCRIPT_FLAGS=${EXTERNAL_DATA_SCRIPT_FLAGS:-}
 EOF
     chmod a+rw .env
     export OSM2PGSQL_CACHE=${OSM2PGSQL_CACHE:-512}
@@ -50,12 +51,15 @@ EOF
   --style openstreetmap-carto.style \
   --tag-transform-script openstreetmap-carto.lua \
   $OSM2PGSQL_DATAFILE
+
+  # Downloading and importing needed shapefiles
+  scripts/get-external-data.py $EXTERNAL_DATA_SCRIPT_FLAGS
+
+  # Download fonts
+  scripts/get-fonts.sh
   ;;
 
 kosmtik)
-  # Downloading needed shapefiles
-  python3 scripts/get-shapefiles.py -n
-
   # Creating default Kosmtik settings file
   if [ ! -e ".kosmtik-config.yml" ]; then
     cp /tmp/.kosmtik-config.yml .kosmtik-config.yml
